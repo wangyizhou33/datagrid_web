@@ -78,3 +78,18 @@ spec: 采集频率 | 30 Hz
 ## 新增一个 Tab
 
 在 `index.html` 脚本顶部的 `TABS` 数组里加一行 `{ id:'xxx', file:'content/xxx/xxx.md' }`，再新建对应 md 文件。发布 Artifact 时记得把新文件一起带上。
+
+## 部署到 GitHub Pages
+
+推送到 `main` 分支后，`.github/workflows/pages.yml` 会自动运行 `scripts/build.sh` 打包到 `_site/` 并发布。
+
+首次使用需要在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
+
+本地预览打包结果：
+
+```bash
+bash scripts/build.sh
+python3 -m http.server 8000 -d _site
+```
+
+打包时会跳过 `*.pdf`、`*.xlsx` 等原始素材，它们不会出现在网站上。
